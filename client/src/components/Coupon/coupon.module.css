@@ -1,0 +1,8 @@
+.coupon {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 400px;
+  padding: 10px;
+  border: 1px solid black;
+}
