@@ -2,23 +2,19 @@ const express = require('express');
 const route = express.Router();
 
 route.get('/', async (req, res) => {
-  // const data = await ;
-  res.status(200).json({ message: 'Hello' });
+  res.status(200).json({ message: 'all data' });
 });
 
-route.get('/mcdonalds', async (req, res) => {
-  // const data = await ;
-  res.status(200).json({ message: 'MCDONALDS' });
+route.get('/coupons', async (req, res) => {
+  res.status(200).json({ message: 'coupons' });
 });
 
-route.get('/kfc', async (req, res) => {
-  // const data = await ;
-  res.status(200).json({ message: 'kfc' });
-});
-
-route.get('/burgerkings', async (req, res) => {
-  // const data = await ;
-  res.status(200).json({ message: 'burgerkings' });
+route.post('/cart', async (req, res) => {
+  const { data } = req.body;
+  if (!data) {
+    return;
+  }
+  console.log(data);
 });
 
 module.exports = route;
