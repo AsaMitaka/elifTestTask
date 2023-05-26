@@ -1,23 +1,40 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { ProductItem } from '../../components';
 
 const Main = () => {
-  const [loading, setLoading] = useState(true);
+  const [isError, setError] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
 
   const [products, setProducts] = useState({});
   const [shops, setShops] = useState();
+
   // useEffect(() => {
-  //   get all products from mongodb
-  //   setLoading(false);
-  // }, data);
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get('/api/data');
+  //       const data = response.data;
+  //       setData(data);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.log(error);
+  //       setError(true);
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [data]);
 
   return (
     <section className="main">
       <h1>Main</h1>
       <div className="main__block">
-        {loading ? (
-          <div>Loading </div>
+        {isError ? (
+          <h2>Error</h2>
+        ) : isLoading ? (
+          <div>Loading...</div>
         ) : (
           <>
             <div className="main__block-shops">
