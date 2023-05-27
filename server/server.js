@@ -1,11 +1,25 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-const { PORT } = require('./config/config');
+const { PORT, mongoDB } = require('./config/config');
 const route = require('./routes/mainRoute');
+
+mongoose
+  .connect(mongoDB)
+  .then(() => {
+    console.log('DB STARTED');
+  })
+  .catch((error) => {
+    console.error('DB connection error:', error);
+  });
 
 const app = express();
 
-app.set(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 
 app.use('/api/data', route);
 app.use('*', (req, res) => {
