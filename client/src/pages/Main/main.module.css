@@ -1,0 +1,17 @@
+.main {
+}
+
+.mainBlock {
+  padding: 10px;
+}
+
+.mainBlockProducts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.mainBlockError {
+  font-weight: bolder;
+  color: red;
+}

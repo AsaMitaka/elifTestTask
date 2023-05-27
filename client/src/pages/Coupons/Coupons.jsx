@@ -2,11 +2,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Coupon } from '../../components';
 
-const Coupons = () => {
-  const [isLoading, setLoading] = useState(true);
-  const [isError, setError] = useState(false);
-  const [coupons, setCoupons] = useState();
-
+// const Coupons = ({ coupons, isLoading, isError }) => {
+const Coupons = ({ coupons }) => {
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
@@ -29,7 +26,7 @@ const Coupons = () => {
       <h2>Coupons</h2>
 
       <div className="coupons__block">
-        {isError ? (
+        {/* {isError ? (
           <h2>Error</h2>
         ) : isLoading ? (
           <h3>Loading</h3>
@@ -41,6 +38,11 @@ const Coupons = () => {
               <h2 className="coupons__block-error">U dont have any coupons </h2>
             )}
           </>
+        )} */}
+        {coupons && coupons.length > 0 ? (
+          coupons.map((item, key) => <Coupon key={key} item={item} />)
+        ) : (
+          <h2 className="coupons__block-error">U dont have any coupons </h2>
         )}
       </div>
     </section>

@@ -1,2 +1,13 @@
-.productitem {
+.productMini {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 150px;
+  height: 250px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.productMiniBtn {
+  padding: 10px 15px;
 }

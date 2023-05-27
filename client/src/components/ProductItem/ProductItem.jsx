@@ -1,18 +1,12 @@
-import { useState } from 'react';
+import styles from './productItem.module.css';
 
-const ProductItem = (item) => {
-  const [count, addCount] = useState(0);
-
-  const addItem = () => {
-    addCount((prev) => prev + 1);
-  };
-
+const ProductItem = ({ item, addToCart }) => {
   return (
-    <div className="product__mini">
+    <div className={styles.productMini}>
       <h1>{item.name}</h1>
       <img src={item.src} alt={item.name} />
-      <button onClick={addItem}>
-        {item.price} Add to Cart counter: {count}
+      <button onClick={() => addToCart(item)} className={styles.productMiniBtn}>
+        {item.price} Add to Cart
       </button>
     </div>
   );

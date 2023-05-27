@@ -1,43 +1,18 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 import { ProductItem } from '../../components';
+import styles from './main.module.css';
 
-const Main = () => {
-  const [isError, setError] = useState(false);
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState({});
-
-  const [products, setProducts] = useState({});
-  const [shops, setShops] = useState();
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get('/api/data');
-  //       const data = response.data;
-  //       setData(data);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.log(error);
-  //       setError(true);
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [data]);
-
+const Main = ({ products, isLoading, isError, addToCart }) => {
   return (
-    <section className="main">
+    <section className={styles.main}>
       <h1>Main</h1>
-      <div className="main__block">
+      <div className={styles.mainBlock}>
         {isError ? (
           <h2>Error</h2>
         ) : isLoading ? (
           <div>Loading...</div>
         ) : (
           <>
-            <div className="main__block-shops">
+            {/* <div className="main__block-shops">
               {shops.length > 0 ? (
                 shops.map((item, key) => (
                   <div className="shop" key={key}>
@@ -47,12 +22,14 @@ const Main = () => {
               ) : (
                 <h2 className="main__block-error">No Shops</h2>
               )}
-            </div>
-            <div className="main__block-products">
+            </div> */}
+            <div className={styles.mainBlockProducts}>
               {products.length > 0 ? (
-                products.map((item, key) => <ProductItem key={key} item={item} />)
+                products.map((item, key) => (
+                  <ProductItem addToCart={addToCart} key={key} item={item} />
+                ))
               ) : (
-                <h2 className="main__block-error">No Products</h2>
+                <h2 className={styles.mainBlockError}>No Products</h2>
               )}
             </div>
           </>

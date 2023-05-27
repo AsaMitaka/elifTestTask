@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Product = (item) => {
+const Product = ({ item, addToCart }) => {
   const [count, addCount] = useState(0);
 
   const addItem = () => {

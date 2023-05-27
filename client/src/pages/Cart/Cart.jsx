@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import styles from './cart.module.css';
 
-const Cart = () => {
+const Cart = ({ cart, setCart }) => {
   const [userInfo, setUserInfo] = useState({
     name: '',
     email: '',
     phone: '',
     address: '',
   });
-
-  const [cartData, setCartData] = useState();
 
   const ChangeInfo = (e) => {
     const getType = e.target.type;
@@ -25,10 +23,12 @@ const Cart = () => {
       return;
     }
 
-    if (!cartData) {
+    if (!cart) {
       return;
     }
   };
+
+  const cartTotal = cart.reduce((total, item) => total + item.price * item.count, 0);
 
   return (
     <section className={styles.cart}>
@@ -76,6 +76,22 @@ const Cart = () => {
       </div>
       <div className={styles.cartProducts}>
         <h2>Products</h2>
+        <div className={styles.cartProductsBlock}>
+          {cart && cart.length > 0 ? (
+            cart.map((item, key) => (
+              <div key={key}>
+                <h1>{item.name}</h1>
+                <p>{item.price}</p>
+                <p>{item.count}</p>
+              </div>
+            ))
+          ) : (
+            <div>No Items in cart</div>
+          )}
+        </div>
+        <div className={styles.cartProductAmount}>
+          <h1>Total: {cartTotal}</h1>
+        </div>
       </div>
       <div className={styles.cartBlockButton}>
         <button onClick={checkData} className={styles.cartButton}>
