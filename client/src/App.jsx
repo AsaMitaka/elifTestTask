@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './app.module.css';
 
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Footer, Header, ProductItem } from './components';
 import { Coupons, Main, Cart } from './pages';
+import { useRecoilState } from 'recoil';
+import { cartState, productsState, isLoadingState, isErrorState } from './recoil/atoms/atoms';
 
 function App() {
-  const [cart, setCart] = useState([]);
-  const [coupons, setCoupons] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [isLoading, setLoading] = useState(true);
-  const [isError, setError] = useState(false);
+  const [cart, setCart] = useRecoilState(cartState);
+  const [products, setProducts] = useRecoilState(productsState);
+  const [isLoading, setLoading] = useRecoilState(isLoadingState);
+  const [isError, setError] = useRecoilState(isErrorState);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,50 +47,15 @@ function App() {
     }
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get('/api/data/coupons');
-  //       const responseData = response.data;
-  //       setLoading(false);
-  //       setCoupons(responseData);
-  //     } catch (error) {
-  //       setError(true);
-  //       setLoading(false);
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [coupons]);
-
   return (
     <div className={styles.container}>
       <Header />
       <main className={styles.main}>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Main
-                products={products}
-                addToCart={addToCart}
-                isLoading={isLoading}
-                isError={isError}
-              />
-            }
-          />
-          <Route path="/product/:id" element={<ProductItem addToCart={addToCart} />} />
-          <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
-          <Route
-            path="/coupons"
-            element={
-              <Coupons
-                coupons={coupons}
-                // isLoading={isLoading} isError={isError}
-              />
-            }
-          />
+          <Route path="/" element={<Main />} />
+          <Route path="/product/:id" element={<ProductItem />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/coupons" element={<Coupons />} />
         </Routes>
       </main>
       <Footer />

@@ -1,12 +1,4 @@
-import { useState } from 'react';
-
-const Product = ({ item, addToCart }) => {
-  const [count, addCount] = useState(0);
-
-  const addItem = () => {
-    addCount((prev) => prev + 1);
-  };
-
+const Product = ({ item }) => {
   return (
     <div className="product">
       <h1>{item.name}</h1>

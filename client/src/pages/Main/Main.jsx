@@ -1,7 +1,13 @@
 import { ProductItem } from '../../components';
+import { useRecoilValue } from 'recoil';
+import { isErrorState, isLoadingState, productsState } from '../../recoil/atoms/atoms';
 import styles from './main.module.css';
 
-const Main = ({ products, isLoading, isError, addToCart }) => {
+const Main = () => {
+  const isError = useRecoilValue(isErrorState);
+  const isLoading = useRecoilValue(isLoadingState);
+  const products = useRecoilValue(productsState);
+
   return (
     <section className={styles.main}>
       <h1>Main</h1>
@@ -25,9 +31,7 @@ const Main = ({ products, isLoading, isError, addToCart }) => {
             </div> */}
             <div className={styles.mainBlockProducts}>
               {products.length > 0 ? (
-                products.map((item, key) => (
-                  <ProductItem addToCart={addToCart} key={key} item={item} />
-                ))
+                products.map((item, key) => <ProductItem key={key} item={item} />)
               ) : (
                 <h2 className={styles.mainBlockError}>No Products</h2>
               )}

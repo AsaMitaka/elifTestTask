@@ -1,25 +1,9 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 import { Coupon } from '../../components';
+import { useRecoilValue } from 'recoil';
+import { couponsState } from '../../recoil/atoms/atoms';
 
-// const Coupons = ({ coupons, isLoading, isError }) => {
-const Coupons = ({ coupons }) => {
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get('/api/data');
-  //       const data = response.data;
-  //       setCoupons(data);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.log(error);
-  //       setError(true);
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [coupons]);
+const Coupons = () => {
+  const coupons = useRecoilValue(couponsState);
 
   return (
     <section className="coupons">
