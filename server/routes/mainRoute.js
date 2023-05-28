@@ -84,7 +84,15 @@ route.post('/cart', async (req, res) => {
       return;
     }
 
-    console.log(data);
+    const newCartOrder = await UserOrder.create({
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      address: data.address,
+      orderItems: [data.orders],
+      totalPrice: data.price,
+    });
+
     res.status(200).json({ message: 'Cart data received' });
   } catch (error) {
     console.log(error);
