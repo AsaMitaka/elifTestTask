@@ -1,3 +1,10 @@
+.error {
+  padding: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
 .cart {
   display: flex;
   flex-direction: row;

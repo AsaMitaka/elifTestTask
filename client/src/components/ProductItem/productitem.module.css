@@ -3,11 +3,17 @@
   flex-direction: column;
   justify-content: space-between;
   width: 150px;
-  height: 250px;
+  height: 125px;
   padding: 10px;
   border: 1px solid black;
 }
 
 .productMiniBtn {
   padding: 10px 15px;
+  cursor: pointer;
+}
+
+.productMiniImg {
+  width: 100px;
+  height: 100px;
 }

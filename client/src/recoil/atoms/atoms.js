@@ -22,6 +22,11 @@ export const productsState = atom({
   default: [],
 });
 
+export const selectedCtgState = atom({
+  key: 'selectedCtgState',
+  default: null,
+});
+
 export const isLoadingState = atom({
   key: 'isLoadingState',
   default: true,

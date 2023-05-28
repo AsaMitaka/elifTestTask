@@ -1,12 +1,26 @@
 import { ProductItem } from '../../components';
-import { useRecoilValue } from 'recoil';
-import { isErrorState, isLoadingState, productsState } from '../../recoil/atoms/atoms';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import {
+  isErrorState,
+  isLoadingState,
+  productsState,
+  selectedCtgState,
+} from '../../recoil/atoms/atoms';
+import { selectedCtgSelector } from '../../recoil/selectors/ctgSelector';
 import styles from './main.module.css';
 
 const Main = () => {
   const isError = useRecoilValue(isErrorState);
   const isLoading = useRecoilValue(isLoadingState);
+  const [selectedCtg, setSelectedCtg] = useRecoilState(selectedCtgState);
+  const selectedProducts = useRecoilValue(selectedCtgSelector);
   const products = useRecoilValue(productsState);
+
+  const categories = [...new Set(products.map((product) => product.ctg))];
+
+  const handleCategorySelect = (category) => {
+    setSelectedCtg(category);
+  };
 
   return (
     <section className={styles.main}>
@@ -18,20 +32,28 @@ const Main = () => {
           <div>Loading...</div>
         ) : (
           <>
-            {/* <div className="main__block-shops">
-              {shops.length > 0 ? (
-                shops.map((item, key) => (
-                  <div className="shop" key={key}>
-                    {item.name}
-                  </div>
+            <div className={styles.mainBlockCtg}>
+              <button
+                onClick={() => handleCategorySelect(null)}
+                className={selectedCtg === null ? styles.mainActiveA : styles.mainA}>
+                All
+              </button>
+              {categories.length > 0 ? (
+                categories.map((ctg, key) => (
+                  <button
+                    key={key}
+                    onClick={() => handleCategorySelect(ctg)}
+                    className={selectedCtg === ctg ? styles.mainActiveA : styles.mainA}>
+                    {ctg}
+                  </button>
                 ))
               ) : (
-                <h2 className="main__block-error">No Shops</h2>
+                <h2 className={styles.mainBlockError}>No Categories</h2>
               )}
-            </div> */}
+            </div>
             <div className={styles.mainBlockProducts}>
-              {products.length > 0 ? (
-                products.map((item, key) => <ProductItem key={key} item={item} />)
+              {selectedProducts.length > 0 ? (
+                selectedProducts.map((item, key) => <ProductItem key={key} item={item} />)
               ) : (
                 <h2 className={styles.mainBlockError}>No Products</h2>
               )}
